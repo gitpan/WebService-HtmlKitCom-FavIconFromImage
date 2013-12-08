@@ -9,8 +9,8 @@ BEGIN {
     use_ok('Carp');
     use_ok('WWW::Mechanize');
     use_ok('Devel::TakeHashArgs');
-    use_ok('Class::Data::Accessor');
-	use_ok( 'WebService::HtmlKitCom::FavIconFromImage' );
+    use_ok('Class::Accessor::Grouped');
+    use_ok( 'WebService::HtmlKitCom::FavIconFromImage' );
 }
 
 diag( "Testing WebService::HtmlKitCom::FavIconFromImage $WebService::HtmlKitCom::FavIconFromImage::VERSION, Perl $], $^X" );

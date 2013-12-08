@@ -3,17 +3,19 @@ package WebService::HtmlKitCom::FavIconFromImage;
 use warnings;
 use strict;
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
 use Carp;
 use WWW::Mechanize;
 use Devel::TakeHashArgs;
-use base 'Class::Data::Accessor';
-__PACKAGE__->mk_classaccessors qw(
+use base 'Class::Accessor::Grouped';
+
+__PACKAGE__->mk_group_accessors( simple => qw(
     error
     mech
     response
-);
+));
+
 
 sub new {
     my $self = bless {}, shift;
@@ -36,12 +38,10 @@ sub favicon {
     my $self = shift;
 
     $self->$_(undef) for qw(error response);
-    
+
     my $image = shift;
     get_args_as_hash( \@_, \ my %args, { # also used: `file`
-            text    => '',
             image   => $image,
-            animate => 0,
         },
     ) or croak $@;
 
@@ -53,20 +53,21 @@ sub favicon {
     $mech->get('http://www.html-kit.com/favicon/')->is_success
         or return $self->_set_error( $mech, 'net' );
 
-    $mech->form_number(2)
+    $mech->form_number(1)
         or return $self->_set_error('Failed to find favicon form');
 
     $mech->set_visible(
         $args{image},
-        $args{text},
-        ( $args{animate} ? 1 : () ),
     );
 
     $mech->click->is_success
         or return $self->_set_error( $mech, 'net' );
 
+#         use Data::Dumper;
+#     print $mech->res->decoded_content;
+#     exit;
     my $response = $mech->follow_link(
-        url_regex => qr|^\Qhttp://www.html-kit.com/favicon/download/|
+        url_regex => qr|^\Qhttp://favicon.htmlkit.com/favicon/download/|
     ) or return $self->_set_error(
             'Failed to create favicon. Check your args'
         );
@@ -103,6 +104,9 @@ sub _set_error {
 1;
 __END__
 
+
+=encoding utf8
+
 =head1 NAME
 
 WebService::HtmlKitCom::FavIconFromImage - generate favicons from images on http://www.html-kit.com/favicon/
@@ -116,8 +120,17 @@ WebService::HtmlKitCom::FavIconFromImage - generate favicons from images on http
 
     my $fav = WebService::HtmlKitCom::FavIconFromImage->new;
 
-    $fav->favicon( 'some_pics.jpg', file => 'out.zip', animate => 1 )
+    $fav->favicon( 'some_pics.jpg', file => 'out.zip' )
         or die $fav->error;
+
+=head1 NOTE ON CHANGED INTERFACE
+
+Since I first released this module, the interface of the website
+changed slightly, so I had to take out the scrolling text and
+animation parameters. Since I currently have no personal need for
+this module, I didn't re-implement those features, but if you
+actually use this module and need those features. Let me know via
+RT, email, or #perl on irc.freenode.net
 
 =head1 DESCRIPTION
 
@@ -170,8 +183,6 @@ is set to as well as C<agent> argument is set to mimic FireFox.
 
     $fav->favicon('some_pic.jpg',
         file    => 'out.zip',
-        text    => 'Zoffix ROXORZ!',
-        animate => 1,
     ) or die $fav->error;
 
 Instructs the object to create a favicon. First argument is mandatory
@@ -190,21 +201,6 @@ If C<file> argument is specified the archive containing the favicon will
 be saved into the file name of which is the value of C<file> argument.
 B<By default> not specified and you'll have to fish out the archive
 from the return value (see below)
-
-=head3 C<animate>
-
-    ->favicon( 'some_pic.jpg', animate => 1 );
-
-B<Optional>. Takes either true or false values. When set to a true value
-will ask the site to make an "animated" icon. B<Defaults to:> C<0>
-
-=head3 C<text>
-
-    ->favicon( 'some_pic.jpg', text => 'Zoffix ROXORZ!' );
-
-B<Optional>. If animation did not make your favicon icon ugly enough then
-specify the C<text> argument which ask the site to add it as
-"Scrolling text" into your favicon. B<Defaults to:> C<''> (no text)
 
 =head3 C<image>
 

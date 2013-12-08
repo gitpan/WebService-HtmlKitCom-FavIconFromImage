@@ -1,24 +1,28 @@
 ---
-name: WebService-HtmlKitCom-FavIconFromImage
-version: 0.001
+abstract: 'generate favicons from images on http://www.html-kit.com/favicon/'
 author:
   - 'Zoffix Znet <zoffix@cpan.org>'
-abstract: generate favicons from images on http://www.html-kit.com/favicon/
+build_requires:
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.40
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4007, CPAN::Meta::Converter version 2.132830'
 license: perl
-resources:
-  license: http://dev.perl.org/licenses/
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: WebService-HtmlKitCom-FavIconFromImage
+provides:
+  WebService::HtmlKitCom::FavIconFromImage:
+    file: lib/WebService/HtmlKitCom/FavIconFromImage.pm
+    version: 0.002
 requires:
   Carp: 1.04
   Class::Data::Accessor: 0.04001
   Devel::TakeHashArgs: 0.002
   WWW::Mechanize: 1.34
-build_requires:
-  Test::More: 0
-provides:
-  WebService::HtmlKitCom::FavIconFromImage:
-    file: lib/WebService/HtmlKitCom/FavIconFromImage.pm
-    version: 0.001
-generated_by: Module::Build version 0.2808
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  perl: 5.006
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.002

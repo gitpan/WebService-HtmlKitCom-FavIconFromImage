@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use lib '../lib';
+use lib qw(lib  ../lib);
 use WebService::HtmlKitCom::FavIconFromImage;
 
 die "Usage: fav.pl <picture_file_to_make_favicon_from>\n"

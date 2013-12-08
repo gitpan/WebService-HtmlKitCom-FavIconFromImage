@@ -2,12 +2,14 @@ Build.PL
 Changes
 MANIFEST
 README
+LICENSE
 lib/WebService/HtmlKitCom/FavIconFromImage.pm
 t/00-load.t
-t/pod-coverage.t
-t/pod.t
-t/kwalitee.t
+xt/pod-coverage.t
+xt/pod.t
+xt/kwalitee.t
 t/pic.jpg
 examples/fav.pl
 Makefile.PL
 META.yml
+META.json

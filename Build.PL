@@ -15,9 +15,13 @@ my $builder = Module::Build->new(
         'WWW::Mechanize'        => 1.34,
         'Devel::TakeHashArgs'   => 0.002,
         'Class::Data::Accessor' => 0.04001,
+        'perl' => '5.006',
     },
     add_to_cleanup      => [ 'WebService-HtmlKitCom-FavIconFromImage-*' ],
     create_makefile_pl => 'traditional',
 );
+if ( $ENV{RELEASE_TESTING} ) {
+    system('pod2text lib/WebService/HtmlKitCom/FavIconFromImage.pm > README');
+}
 
 $builder->create_build_script();
