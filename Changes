@@ -1,5 +1,9 @@
 Revision history for WebService-HtmlKitCom-FavIconFromImage
 
+0.003   2013-12-07
+        - Fixed: forgot to swap out Class::Data::Accessor
+          to Class:Accessor::Grouped in prereqs
+
 0.002   2013-12-07
         [ Changes to core module ]
         - Removed 'animate' and 'text' parameters due to the changes

@@ -27,7 +27,7 @@
       "runtime" : {
          "requires" : {
             "Carp" : "1.04",
-            "Class::Data::Accessor" : "0.04001",
+            "Class::Accessor::Grouped" : "0",
             "Devel::TakeHashArgs" : "0.002",
             "WWW::Mechanize" : "1.34",
             "perl" : "5.006"
@@ -37,7 +37,7 @@
    "provides" : {
       "WebService::HtmlKitCom::FavIconFromImage" : {
          "file" : "lib/WebService/HtmlKitCom/FavIconFromImage.pm",
-         "version" : "0.002"
+         "version" : "0.003"
       }
    },
    "release_status" : "stable",
@@ -46,5 +46,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.002"
+   "version" : "0.003"
 }

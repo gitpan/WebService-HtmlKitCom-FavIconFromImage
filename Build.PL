@@ -14,7 +14,7 @@ my $builder = Module::Build->new(
         'Carp'                  => 1.04,
         'WWW::Mechanize'        => 1.34,
         'Devel::TakeHashArgs'   => 0.002,
-        'Class::Data::Accessor' => 0.04001,
+        'Class::Accessor::Grouped' => 0,
         'perl' => '5.006',
     },
     add_to_cleanup      => [ 'WebService-HtmlKitCom-FavIconFromImage-*' ],

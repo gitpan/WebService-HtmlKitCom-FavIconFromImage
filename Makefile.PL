@@ -7,7 +7,7 @@ WriteMakefile
   'VERSION_FROM' => 'lib/WebService/HtmlKitCom/FavIconFromImage.pm',
   'PREREQ_PM' => {
                    'Carp' => '1.04',
-                   'Class::Data::Accessor' => '0.04001',
+                   'Class::Accessor::Grouped' => 0,
                    'Devel::TakeHashArgs' => '0.002',
                    'Test::More' => 0,
                    'WWW::Mechanize' => '1.34'
